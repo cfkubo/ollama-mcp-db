@@ -119,6 +119,92 @@ Built with:
    - Check database permissions
    - Verify table/column names in the schema
 
+### Sample:
+```
+What would you like to know about your data? what table are available in public schema
+
+Analyzing...
+
+
+Sending request to Ollama...
+Received response from Ollama: {
+  model: 'qwen2.5-coder:7b-instruct',
+  created_at: '2025-03-15T14:52:28.09336Z',
+  message: {
+    role: 'assistant',
+    content: '```sql\n' +
+      'SELECT table_name \n' +
+      'FROM information_schema.tables \n' +
+      "WHERE table_schema = 'public';\n" +
+      '```'
+  },
+  done_reason: 'stop',
+  done: true,
+  total_duration: 16346180667,
+  load_duration: 846204250,
+  prompt_eval_count: 1066,
+  prompt_eval_duration: 14760000000,
+  eval_count: 21,
+  eval_duration: 580000000
+}
+Query result: [
+  {
+    "table_name": "customer_order"
+  },
+  {
+    "table_name": "salesorders_json"
+  },
+  {
+    "table_name": "salesorders"
+  },
+  {
+    "table_name": "salesorders_read"
+  },
+  {
+    "table_name": "vectorized_data"
+  }
+]
+
+Retry attempt 1...
+Sending request to Ollama...
+Received response from Ollama: {
+  model: 'qwen2.5-coder:7b-instruct',
+  created_at: '2025-03-15T14:52:30.567163Z',
+  message: {
+    role: 'assistant',
+    content: 'Based on the provided query results, the tables available in the public schema are:\n' +
+      '\n' +
+      '1. `customer_order`\n' +
+      '2. `salesorders_json`\n' +
+      '3. `salesorders`\n' +
+      '4. `salesorders_read`\n' +
+      '5. `vectorized_data`\n' +
+      '\n' +
+      'Final Answer:\n' +
+      'The tables available in the public schema are: customer_order, salesorders_json, salesorders, salesorders_read, vectorized_data'
+  },
+  done_reason: 'stop',
+  done: true,
+  total_duration: 2358331917,
+  load_duration: 32070292,
+  prompt_eval_count: 1175,
+  prompt_eval_duration: 218000000,
+  eval_count: 79,
+  eval_duration: 2096000000
+}
+
+ Based on the provided query results, the tables available in the public schema are:
+
+1. `customer_order`
+2. `salesorders_json`
+3. `salesorders`
+4. `salesorders_read`
+5. `vectorized_data`
+
+Final Answer:
+The tables available in the public schema are: customer_order, salesorders_json, salesorders, salesorders_read, vectorized_data
+```
+
 ## License
 
 MIT
