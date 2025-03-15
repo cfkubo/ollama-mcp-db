@@ -32,7 +32,7 @@ cd [your-repo-name]
 npm install
 ```
 
-3. Pull the required Ollama model:
+3. Pull the required Ollama model: # works with codegemma
 
 ```bash
 ollama pull qwen2.5-coder:7b-instruct
