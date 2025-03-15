@@ -147,7 +147,7 @@ class OllamaMCPHost {
 
   constructor(modelName?: string) {
     this.modelName =
-      modelName || process.env.OLLAMA_MODEL || "qwen2.5-coder:7b-instruct";
+      modelName || process.env.OLLAMA_MODEL || "codegemma:latest";
     this.transport = new StdioClientTransport({
       command: "npx",
       args: ["-y", "@modelcontextprotocol/server-postgres", databaseUrl!],

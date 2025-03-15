@@ -1,0 +1,10 @@
+
+> ollama-mcp-db@1.0.0 start
+> tsx src/index.ts
+
+
+Connected to database. You can now ask questions about your data.
+Type "/exit" to quit.
+
+
+What would you like to know about your data? 
