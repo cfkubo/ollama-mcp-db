@@ -159,10 +159,13 @@ class OllamaMCPHost {
   }
 
   async connect() {
+    console.log("Connecting to the database...");
     await this.client.connect(this.transport);
+    console.log("Connected to the database.");
   }
 
   private async executeQuery(sql: string): Promise<string> {
+    console.log(`Executing SQL query: ${sql}`);
     const response = await this.client.request(
       {
         method: "tools/call",
@@ -182,10 +185,12 @@ class OllamaMCPHost {
   }
 
   private addToHistory(role: string, content: string) {
+    console.log(`Adding to history - Role: ${role}, Content: ${content}`);
     this.chatHistory.push({ role, content });
     while (this.chatHistory.length > this.MAX_HISTORY_LENGTH) {
       this.chatHistory.shift();
     }
+    console.log("Updated chat history:", this.chatHistory);
   }
 
   async processQuestion(question: string): Promise<string> {
@@ -232,10 +237,12 @@ class OllamaMCPHost {
             "user",
             `Here are the results of the SQL query: ${queryResult}`
           );
+          return queryResult;
         } catch (error) {
           const errorMessage =
             error instanceof Error ? error.message : String(error);
           this.addToHistory("user", errorMessage);
+          console.error("Error executing query:", errorMessage);
           if (attemptCount === this.MAX_RETRIES) {
             return `I apologize, but I was unable to successfully query the database after ${
               this.MAX_RETRIES + 1
@@ -256,7 +263,9 @@ class OllamaMCPHost {
   }
 
   async cleanup() {
+    console.log("Closing transport...");
     await this.transport.close();
+    console.log("Transport closed.");
   }
 }
 
