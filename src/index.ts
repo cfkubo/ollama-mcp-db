@@ -4,6 +4,7 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 import { CallToolResultSchema } from "@modelcontextprotocol/sdk/types.js";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -144,6 +145,7 @@ class OllamaMCPHost {
   private chatHistory: { role: string; content: string }[] = [];
   private readonly MAX_HISTORY_LENGTH = 20;
   private readonly MAX_RETRIES = 5;
+  private isConnected: boolean = false;
 
   constructor(modelName?: string) {
     this.modelName =
@@ -159,9 +161,12 @@ class OllamaMCPHost {
   }
 
   async connect() {
-    console.log("Connecting to the database...");
-    await this.client.connect(this.transport);
-    console.log("Connected to the database.");
+    if (!this.isConnected) {
+      console.log("Connecting to the database...");
+      await this.client.connect(this.transport);
+      this.isConnected = true;
+      console.log("Connected to the database.");
+    }
   }
 
   private async executeQuery(sql: string): Promise<string> {
@@ -195,6 +200,9 @@ class OllamaMCPHost {
 
   async processQuestion(question: string): Promise<string> {
     try {
+      // Reconnect to the database for every new chat request
+      await this.connect();
+
       let attemptCount = 0;
 
       while (attemptCount <= this.MAX_RETRIES) {
@@ -265,6 +273,7 @@ class OllamaMCPHost {
   async cleanup() {
     console.log("Closing transport...");
     await this.transport.close();
+    this.isConnected = false;
     console.log("Transport closed.");
   }
 }
@@ -315,7 +324,11 @@ async function main() {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+// Get the current file path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+if (process.argv[1] === __filename) {
   main().catch(console.error);
 }
 
