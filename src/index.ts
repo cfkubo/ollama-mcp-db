@@ -126,7 +126,11 @@ I have a database with the following tables:
   {"table_name": "role"},
   {"table_name": "line_item_transition_log"},
   {"table_name": "openadr_settings"},
-  {"table_name": "settlement_payment_transition_log"}
+  {"table_name": "settlement_payment_transition_log"},
+  {"table_name": "salesorders"},
+  {"table_name": "salesorders_read"},
+  {"table_name": "customer_order"}
+
 ]
 
 I have a question:
@@ -173,6 +177,7 @@ class OllamaMCPHost {
     if (!response.content?.[0]?.text) {
       throw new Error("No text content received from query");
     }
+    console.log(`Query result: ${response.content[0].text}`);
     return response.content[0].text as string;
   }
 
@@ -202,10 +207,12 @@ class OllamaMCPHost {
         );
 
         // Get response from Ollama
+        console.log("Sending request to Ollama...");
         const response = await ollama.chat({
           model: this.modelName,
           messages: messages,
         });
+        console.log("Received response from Ollama:", response);
         this.addToHistory("assistant", response.message.content);
 
         // Extract SQL query
