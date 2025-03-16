@@ -1,4 +1,4 @@
-# Ollama MCP Database Assistant
+# Ollama Postgres MCP Database Assistant
 
 An interactive chat interface that combines Ollama's LLM capabilities with PostgreSQL database access through the Model Context Protocol (MCP). Ask questions about your data in natural language and get AI-powered responses backed by real SQL queries.
 
@@ -22,8 +22,8 @@ An interactive chat interface that combines Ollama's LLM capabilities with Postg
 1. Clone the repository:
 
 ```bash
-git clone [your-repo-url]
-cd [your-repo-name]
+git clone https://github.com/cfkubo/ollama-mcp-db
+cd ollama-mcp-db
 ```
 
 2. Install dependencies:
