@@ -190,12 +190,12 @@ class OllamaMCPHost {
   }
 
   private addToHistory(role: string, content: string) {
-    console.log(`Adding to history - Role: ${role}, Content: ${content}`);
+    // console.log(`Adding to history - Role: ${role}, Content: ${content}`);
     this.chatHistory.push({ role, content });
     while (this.chatHistory.length > this.MAX_HISTORY_LENGTH) {
       this.chatHistory.shift();
     }
-    console.log("Updated chat history:", this.chatHistory);
+    // console.log("Updated chat history:", this.chatHistory);
   }
 
   async processQuestion(question: string): Promise<string> {
@@ -226,13 +226,13 @@ class OllamaMCPHost {
           messages: messages,
         });
         console.log("Received response from Ollama:", response);
-        this.addToHistory("assistant", response.message.content);
 
         // Extract SQL query
         const sqlMatch = response.message.content.match(
           /```sql\n([\s\S]*?)\n```/
         );
         if (!sqlMatch) {
+          this.addToHistory("assistant", response.message.content);
           return response.message.content;
         }
 
@@ -241,6 +241,7 @@ class OllamaMCPHost {
         try {
           // Execute the query
           const queryResult = await this.executeQuery(sql);
+          this.addToHistory("assistant", response.message.content);
           this.addToHistory(
             "user",
             `Here are the results of the SQL query: ${queryResult}`
