@@ -1,0 +1,6 @@
+what is postgres version currenlty running?
+what are the tables available in public schema?
+How many rows are there in each table?
+Can you pull top 10 rows from salesorders_read table?
+Can you provide the number of distinct customers in the salesorders_read table?
+How many Gold Ring did we sold per day? The data you need is in salesorders_read table?
