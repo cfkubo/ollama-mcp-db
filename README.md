@@ -322,6 +322,47 @@ Query result: [
     "payload": "{product='Gold Ring', price=176.77, quantity=6, shipTo='Address 69', paymentMethod='credit', orderDate=2025-03-05, address='917 Sunset Blvd, Vegas, USA, 54543', storeName='Mega Emporium', storeAddress='220 Pine Ln, Anytown, USA, 38337', salesRepName='Charlie Johnson'}"
   }
 ]
+
+What would you like to know about your data? what is total sum of price for  product type Gold Ring from salesorders_read tables
+
+Analyzing...
+
+
+Sending request to Ollama...
+Received response from Ollama: {
+  model: 'codegemma:latest',
+  created_at: '2025-03-19T22:11:59.79683Z',
+  message: {
+    role: 'assistant',
+    content: '```sql\n' +
+      'SELECT SUM(price)\n' +
+      'FROM salesorders_read\n' +
+      "WHERE product = 'Gold Ring';\n" +
+      '```'
+  },
+  done_reason: 'stop',
+  done: true,
+  total_duration: 6650008167,
+  load_duration: 68054084,
+  prompt_eval_count: 1747,
+  prompt_eval_duration: 5389000000,
+  eval_count: 25,
+  eval_duration: 1179000000
+}
+Executing SQL query: SELECT SUM(price)
+FROM salesorders_read
+WHERE product = 'Gold Ring';
+Query result: [
+  {
+    "sum": "20777042.39"
+  }
+]
+
+ [
+  {
+    "sum": "20777042.39"
+  }
+] 
 ```
 
 ## License
