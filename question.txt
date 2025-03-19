@@ -2,7 +2,10 @@ what is postgres version currenlty running?
 what are the tables available in public schema?
 How many rows are there in each table?
 Can you pull top 10 rows from salesorders_read table?
-Can you provide the number of distinct customers in the salesorders_read table?
-How many Gold Ring did we sold per day? The data you need is in salesorders_read table?
- what are columns available in salesorders_read table?
- what is total sum of price for  product type Gold Ring from salesorders_read tables?
+Can you provide the number of distinct products in the salesorders_read table?
+Can you tell me How many Gold Ring did we sold per day by querying the salesorders_read table?
+Can you tell me what is count of product Gold Ring sold per day by querying the salesorders_read table?
+what are columns available in salesorders_read table?
+what is total sum of price for  product is Gold Ring from salesorders_read tables?
+what is total sum of price for each product  from salesorders_read tables?
+Can you get the distinct product in the salesorders_read table?
