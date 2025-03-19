@@ -44,7 +44,10 @@ ollama pull qwen2.5-coder:7b-instruct
 DATABASE_URL=postgresql://user:password@localhost:5432/dbname
 OLLAMA_MODEL=qwen2.5-coder:7b-instruct  # Optional - this is the default
 ```
-
+5. Setup postgres and create you tables and load data
+```
+docker run --name some-postgres -e POSTGRES_PASSWORD=password -d postgres
+```
 ## Usage
 
 1. Start the chat interface:
