@@ -4,3 +4,5 @@ How many rows are there in each table?
 Can you pull top 10 rows from salesorders_read table?
 Can you provide the number of distinct customers in the salesorders_read table?
 How many Gold Ring did we sold per day? The data you need is in salesorders_read table?
+ what are columns available in salesorders_read table?
+ what is total sum of price for  product type Gold Ring from salesorders_read tables?
