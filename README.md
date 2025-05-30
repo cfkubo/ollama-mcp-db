@@ -365,6 +365,20 @@ Query result: [
 ] 
 ```
 
+```
+npm start web
+```
+
+```
+cd webui   
+npm install
+npm run dev
+```
+
+```
+npm run web
+```
+
 ## License
 
 MIT

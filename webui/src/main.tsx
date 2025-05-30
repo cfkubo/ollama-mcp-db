@@ -30,28 +30,90 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "2rem auto", fontFamily: "sans-serif" }}>
-      <h2>Ollama MCP Web Chat</h2>
-      <div style={{ border: "1px solid #ccc", padding: 16, minHeight: 300 }}>
-        {messages.map((msg, i) => (
-          <div key={i} style={{ margin: "8px 0" }}>
-            <b>{msg.role === "user" ? "You" : "AI"}:</b> <span>{msg.content}</span>
+    <div
+      style={{
+        minHeight: "100vh",
+        width: "100vw",
+        boxSizing: "border-box",
+        background: "#f8f9fa",
+        fontFamily: "sans-serif",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <h2 style={{ textAlign: "center", margin: "2rem 0 1rem 0" }}>Ollama MCP Web Chat</h2>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "stretch",
+        }}
+      >
+        <div
+          style={{
+            background: "#fff",
+            border: "1px solid #ccc",
+            borderRadius: 8,
+            padding: 24,
+            width: "100%",
+            maxWidth: 800,
+            margin: "0 16px",
+            minHeight: 0,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              minHeight: 400,
+              marginBottom: 16,
+            }}
+          >
+            {messages.map((msg, i) => (
+              <div key={i} style={{ margin: "8px 0" }}>
+                <b>{msg.role === "user" ? "You" : "AI"}:</b> <span>{msg.content}</span>
+              </div>
+            ))}
+            {loading && <div>Loading...</div>}
           </div>
-        ))}
-        {loading && <div>Loading...</div>}
+          <form onSubmit={sendQuestion} style={{ display: "flex" }}>
+            <input
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Ask a question about your data..."
+              style={{
+                flex: 1,
+                padding: 12,
+                fontSize: 16,
+                borderRadius: 4,
+                border: "1px solid #ccc",
+              }}
+              disabled={loading}
+            />
+            <button
+              type="submit"
+              disabled={loading || !question.trim()}
+              style={{
+                marginLeft: 8,
+                padding: "0 24px",
+                fontSize: 16,
+                borderRadius: 4,
+                border: "none",
+                background: "#1976d2",
+                color: "#fff",
+                cursor: loading || !question.trim() ? "not-allowed" : "pointer",
+                transition: "background 0.2s",
+                height: 44,
+              }}
+            >
+              Send
+            </button>
+          </form>
+        </div>
       </div>
-      <form onSubmit={sendQuestion} style={{ marginTop: 16, display: "flex" }}>
-        <input
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Ask a question about your data..."
-          style={{ flex: 1, padding: 8 }}
-          disabled={loading}
-        />
-        <button type="submit" disabled={loading || !question.trim()} style={{ marginLeft: 8 }}>
-          Send
-        </button>
-      </form>
     </div>
   );
 }
