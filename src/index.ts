@@ -153,6 +153,8 @@ class OllamaMCPHost {
     this.transport = new StdioClientTransport({
       command: "npx",
       args: ["-y", "@modelcontextprotocol/server-postgres", databaseUrl!],
+      // args: ["-y", "@henkey/postgres-mcp-server", databaseUrl!],
+
     });
     this.client = new Client(
       { name: "ollama-mcp-host", version: "1.0.0" },
